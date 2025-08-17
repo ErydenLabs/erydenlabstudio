@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recrutement - À venir</title>
+<title>Contact - À venir</title>
 <style>
 html,body{margin:0;padding:0;font-family:Arial,sans-serif;background:#87CEEB;overflow-x:hidden;color:white;}
 canvas{position:fixed;top:0;left:0;z-index:-1;}
 header{padding:20px;background:rgba(0,0,0,0.5);position:sticky;top:0;z-index:10;}
 nav a{margin:0 15px;text-decoration:none;color:white;font-weight:bold;transition:0.3s;}
 nav a:hover{color:#ff4757;}
-section{padding:50px 20px;margin:20px auto;max-width:1000px;border-radius:12px;background:rgba(0,0,0,0.3);}
+section{padding:50px 20px;margin:20px auto;max-width:600px;border-radius:12px;background:rgba(0,0,0,0.3);}
 h1,h2{margin-bottom:20px;}
-.card-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
-.card{background:rgba(255,255,255,0.1);padding:20px;border-radius:12px;text-align:center;cursor:pointer;}
-.card:hover{background:rgba(255,255,255,0.3);transform:scale(1.05);}
-.card h3{margin-bottom:10px;}
-.btn{display:inline-block;margin-top:15px;padding:10px 25px;background:#ff4757;color:white;text-decoration:none;border-radius:8px;font-weight:bold;position:relative;overflow:hidden;}
+form{display:flex;flex-direction:column;}
+input,textarea{margin-bottom:15px;padding:12px;border-radius:8px;border:none;font-size:16px;}
+textarea{resize:none;height:120px;}
+.btn{display:inline-block;padding:15px 30px;background:#ff4757;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:0.3s;position:relative;overflow:hidden;border:none;cursor:pointer;}
 .btn:hover{background:#e84118;}
 .btn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:rgba(255,255,255,0.2);transform:skewX(-25deg);transition:0.5s;}
 .btn:hover::after{left:125%;}
@@ -37,30 +36,22 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </header>
 
 <section>
-<h1>🚩 Recrutement</h1>
-<p>Rejoignez notre équipe et participez au développement du jeu !</p>
-<div class="card-container">
-  <div class="card">
-    <h3>👮 Modérateur</h3>
-    <p>Gérez la communauté et assurez la sécurité.</p>
-    <a href="https://discord.gg/cKKDpz53" class="btn">Postuler</a>
-  </div>
-  <div class="card">
-    <h3>🎧 Support</h3>
-    <p>Aidez les joueurs et répondez à leurs questions.</p>
-    <a href="https://discord.gg/cKKDpz53" class="btn">Postuler</a>
-  </div>
-  <div class="card">
-    <h3>📢 Community Manager</h3>
-    <p>Animez la communauté et partagez les news.</p>
-    <a href="https://discord.gg/cKKDpz53" class="btn">Postuler</a>
-  </div>
-  <div class="card">
-    <h3>💻 Développeur</h3>
-    <p>Participez à la création du jeu Roblox.</p>
-    <a href="https://discord.gg/cKKDpz53" class="btn">Postuler</a>
-  </div>
-</div>
+<h1>📬 Contact</h1>
+<p>Envoyez-nous un message ou rejoignez directement notre Discord !</p>
+
+<form action="https://formsubmit.co/tonemail@example.com" method="POST">
+<input type="text" name="name" placeholder="Votre nom" required>
+<input type="email" name="email" placeholder="Votre email" required>
+<textarea name="message" placeholder="Votre message" required></textarea>
+<button type="submit" class="btn">Envoyer</button>
+
+<!-- Optionnel : redirection après envoi -->
+<input type="hidden" name="_next" value="merci.html">
+<!-- Optionnel : confirmation captcha -->
+<input type="hidden" name="_captcha" value="true">
+</form>
+
+<a href="https://discord.gg/cKKDpz53" class="btn" style="margin-top:20px;">💬 Rejoindre Discord</a>
 </section>
 
 <footer>
@@ -72,7 +63,7 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 const canvas=document.getElementById('bgCanvas');const ctx=canvas.getContext('2d');
 let width=canvas.width=window.innerWidth;let height=canvas.height=window.innerHeight;
 const particles=[];const particleCount=150;let mouse={x:width/2,y:height/2};
-class Particle{constructor(){this.reset();}reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.radius=Math.random()*3+1;this.speedX=(Math.random()-0.5)*1;this.speedY=(Math.random()-0.5)*1;this.alpha=Math.random()*0.5+0.5;}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${this.alpha})`;ctx.fill();}update(){const dx=mouse.x-this.x;const dy=mouse.y-this.y;this.x+=this.speedX+dx*0.001;this.y+=this.speedY+dy*0.001;if(this.x<0||this.x>width||this.y<0||this.y>height)this.reset();}}
+class Particle{constructor(){this.reset();}reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.radius=Math.random()*3+1;this.speedX=(Math.random()-0.5)*1;this.speedY=(Math.random()-0.5)*1;this.alpha=Math.random()*0.5+0.5;}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${this.alpha})`;ctx.fill();}update(){const dx=mouse.x-this.x,const dy=mouse.y-this.y;this.x+=this.speedX+dx*0.001;this.y+=this.speedY+dy*0.001;if(this.x<0||this.x>width||this.y<0||this.y>height)this.reset();}}
 for(let i=0;i<particleCount;i++)particles.push(new Particle());
 function animate(){ctx.fillStyle='#87CEEB';ctx.fillRect(0,0,width,height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
 animate();
