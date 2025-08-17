@@ -6,27 +6,27 @@
 <title>Accueil - À venir</title>
 <style>
 html,body{margin:0;padding:0;height:100%;font-family:Arial, sans-serif;overflow-x:hidden;}
-body{color:white;position:relative;}
+body{color:white;position:relative;background:#87CEEB;}
 canvas{position:fixed;top:0;left:0;z-index:-1;}
-header{padding:20px;background:rgba(0,0,0,0.5);position:sticky;top:0;z-index:10;}
+header{padding:20px;background:rgba(0,0,0,0.5);position:sticky;top:0;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.3);}
 nav a{margin:0 15px;text-decoration:none;color:white;font-weight:bold;transition:0.3s;}
-nav a:hover{color:#ff4757;}
-.hero{padding:120px 20px 80px 20px;text-align:center;}
-.hero h1{font-size:3em;margin-bottom:10px;}
-.hero p{font-size:1.2em;margin-bottom:20px;}
-.btn{display:inline-block;margin-top:20px;padding:15px 30px;background:#ff4757;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:0.3s;position:relative;overflow:hidden;}
-.btn:hover{background:#e84118;}
+nav a:hover{color:#ff4757;text-shadow:0 0 10px rgba(255,71,87,0.7);}
+.hero{padding:120px 20px 80px 20px;text-align:center;animation:fadeInUp 1.5s forwards;}
+.hero h1{font-size:3em;margin-bottom:10px;text-shadow:2px 2px 10px rgba(0,0,0,0.3);}
+.hero p{font-size:1.2em;margin-bottom:20px;text-shadow:1px 1px 5px rgba(0,0,0,0.3);}
+.btn{display:inline-block;margin-top:20px;padding:15px 30px;background:#ff4757;color:white;text-decoration:none;border-radius:10px;font-weight:bold;transition:0.5s;position:relative;overflow:hidden;box-shadow:0 0 10px rgba(255,71,87,0.6);}
+.btn:hover{background:#e84118;box-shadow:0 0 20px rgba(255,71,87,0.9);}
 .btn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:rgba(255,255,255,0.2);transform:skewX(-25deg);transition:0.5s;}
 .btn:hover::after{left:125%;}
-section{margin:40px auto;padding:30px;background:rgba(255,255,255,0.2);border-radius:15px;max-width:1200px;box-shadow:0 8px 20px rgba(0,0,0,0.3);}
-section h2{margin-bottom:20px;font-size:2rem;border-bottom:2px solid #fff;display:inline-block;padding-bottom:5px;}
+section{margin:40px auto;padding:30px;background:rgba(255,255,255,0.2);border-radius:20px;max-width:1200px;box-shadow:0 8px 25px rgba(0,0,0,0.3);opacity:0;transform:translateY(50px);transition:1s ease;}
+section.visible{opacity:1;transform:translateY(0);}
+section h2{margin-bottom:20px;font-size:2rem;border-bottom:2px solid #fff;display:inline-block;padding-bottom:5px;text-shadow:1px 1px 5px rgba(0,0,0,0.2);}
 section p{font-size:1.1rem;line-height:1.6;}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-.card{background:rgba(255,255,255,0.1);padding:20px;border-radius:15px;text-align:center;transition:0.3s;}
-.card:hover{background:rgba(255,255,255,0.25);transform:translateY(-5px);}
-.fade-in{opacity:0;animation:fadeIn 1.5s forwards;}
-@keyframes fadeIn{to{opacity:1;}}
-footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;}
+.card{background:rgba(255,255,255,0.1);padding:20px;border-radius:15px;text-align:center;transition:0.5s;box-shadow:0 4px 15px rgba(0,0,0,0.2);}
+.card:hover{background:rgba(255,255,255,0.25);transform:translateY(-10px) scale(1.05);box-shadow:0 8px 25px rgba(0,0,0,0.4);}
+footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;box-shadow:0 -4px 15px rgba(0,0,0,0.3);}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(50px);}100%{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
@@ -49,12 +49,12 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </div>
 
 <!-- Sections pro -->
-<section class="fade-in">
+<section>
 <h2>À propos du jeu</h2>
 <p>Découvrez une expérience unique sur Roblox avec des mécaniques innovantes, des graphismes impressionnants et un univers captivant !</p>
 </section>
 
-<section class="fade-in">
+<section>
 <h2>Fonctionnalités principales</h2>
 <div class="grid">
 <div class="card"><h3>Multijoueur</h3><p>Affrontez des joueurs du monde entier dans des batailles épiques.</p></div>
@@ -69,13 +69,28 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </footer>
 
 <script>
-// Canvas particules amélioré
-const canvas=document.getElementById('bgCanvas');const ctx=canvas.getContext('2d');let width=canvas.width=window.innerWidth,height=canvas.height=window.innerHeight;const particles=[];const particleCount=150;let mouse={x:width/2,y:height/2};
-class Particle{constructor(){this.reset()}reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.radius=Math.random()*3+1;this.speedX=(Math.random()-0.5)*0.8;this.speedY=(Math.random()-0.5)*0.8;this.alpha=Math.random()*0.5+0.5;}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${this.alpha})`;ctx.fill();}update(){const dx=mouse.x-this.x,dy=mouse.y-this.y;this.x+=this.speedX+dx*0.001;this.y+=this.speedY+dy*0.001;if(this.x<0||this.x>width||this.y<0||this.y>height)this.reset();}}
+// Canvas particules pro
+const canvas=document.getElementById('bgCanvas');
+const ctx=canvas.getContext('2d');
+let width=canvas.width=window.innerWidth;
+let height=canvas.height=window.innerHeight;
+const particles=[],particleCount=150;
+let mouse={x:width/2,y:height/2};
+
+class Particle{
+constructor(){this.reset()}
+reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.radius=Math.random()*3+1;this.speedX=(Math.random()-0.5)*0.8;this.speedY=(Math.random()-0.5)*0.8;this.alpha=Math.random()*0.5+0.5;}
+draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${this.alpha})`;ctx.fill();}
+update(){const dx=mouse.x-this.x,dy=mouse.y-this.y;this.x+=this.speedX+dx*0.001;this.y+=this.speedY+dy*0.001;if(this.x<0||this.x>width||this.y<0||this.y>height)this.reset();}}
 for(let i=0;i<particleCount;i++)particles.push(new Particle());
-function animate(){ctx.fillStyle='#87CEEB';ctx.fillRect(0,0,width,height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
-animate();window.addEventListener('resize',()=>{width=canvas.width=window.innerWidth;height=canvas.height=window.innerHeight;});
+function animate(){ctx.fillStyle='rgba(135,206,235,0.2)';ctx.fillRect(0,0,width,height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+animate();
+window.addEventListener('resize',()=>{width=canvas.width=window.innerWidth;height=canvas.height=window.innerHeight;});
 window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+
+// Fade-in sections au scroll
+const sections=document.querySelectorAll('section');
+window.addEventListener('scroll',()=>{sections.forEach(sec=>{if(sec.getBoundingClientRect().top < window.innerHeight - 100){sec.classList.add('visible');}})});
 </script>
 </body>
 </html>
