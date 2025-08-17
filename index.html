@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accueil - À venir</title>
 <style>
-html,body{margin:0;padding:0;height:100%;font-family:Arial, sans-serif;overflow-x:hidden;}
+html,body{margin:0;padding:0;height:100%;font-family:Arial,sans-serif;overflow-x:hidden;}
 body{color:white;position:relative;background:#87CEEB;}
-canvas{position:fixed;top:0;left:0;z-index:-1;}
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+#transition{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;opacity:0;pointer-events:none;transition:opacity 0.5s;z-index:9999;}
 header{padding:20px;background:rgba(0,0,0,0.5);position:sticky;top:0;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.3);}
 nav a{margin:0 15px;text-decoration:none;color:white;font-weight:bold;transition:0.3s;}
 nav a:hover{color:#ff4757;text-shadow:0 0 10px rgba(255,71,87,0.7);}
@@ -30,6 +31,8 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </style>
 </head>
 <body>
+
+<div id="transition"></div>
 <canvas id="bgCanvas"></canvas>
 
 <header>
@@ -48,7 +51,6 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 <a href="https://discord.gg/cKKDpz53" class="btn">💬 Rejoindre Discord</a>
 </div>
 
-<!-- Sections pro -->
 <section>
 <h2>À propos du jeu</h2>
 <p>Découvrez une expérience unique sur Roblox avec des mécaniques innovantes, des graphismes impressionnants et un univers captivant !</p>
@@ -69,6 +71,22 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </footer>
 
 <script>
+// Transition entre pages
+const transition = document.getElementById('transition');
+const links = document.querySelectorAll('a[href^="index"], a[href^="apropos"], a[href^="gallery"], a[href^="recrutement"], a[href^="contact"]');
+
+links.forEach(link=>{
+    link.addEventListener('click', e=>{
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        transition.style.pointerEvents = 'all';
+        transition.style.opacity = 1;
+        setTimeout(()=>{ window.location = href; }, 500);
+    });
+});
+
+window.addEventListener('load', ()=>{ transition.style.opacity = 0; });
+
 // Canvas particules pro
 const canvas=document.getElementById('bgCanvas');
 const ctx=canvas.getContext('2d');
@@ -92,5 +110,6 @@ window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
 const sections=document.querySelectorAll('section');
 window.addEventListener('scroll',()=>{sections.forEach(sec=>{if(sec.getBoundingClientRect().top < window.innerHeight - 100){sec.classList.add('visible');}})});
 </script>
+
 </body>
 </html>
