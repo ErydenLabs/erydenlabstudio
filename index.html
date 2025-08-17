@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Accueil - À venir</title>
 <style>
-html,body{margin:0;padding:0;height:100%;font-family:Arial,sans-serif;overflow-x:hidden;}
-body{color:white;position:relative;background:#87CEEB;}
+html,body{margin:0;padding:0;height:100%;font-family:Arial,sans-serif;overflow-x:hidden;background:#87CEEB;}
+body{color:white;position:relative;opacity:0;transition:opacity 0.5s;}
 canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
-#transition{position:fixed;top:0;left:0;width:100%;height:100%;background:#000;opacity:0;pointer-events:none;transition:opacity 0.5s;z-index:9999;}
 header{padding:20px;background:rgba(0,0,0,0.5);position:sticky;top:0;z-index:10;box-shadow:0 4px 15px rgba(0,0,0,0.3);}
 nav a{margin:0 15px;text-decoration:none;color:white;font-weight:bold;transition:0.3s;}
 nav a:hover{color:#ff4757;text-shadow:0 0 10px rgba(255,71,87,0.7);}
@@ -32,7 +31,6 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </head>
 <body>
 
-<div id="transition"></div>
 <canvas id="bgCanvas"></canvas>
 
 <header>
@@ -71,21 +69,21 @@ footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;
 </footer>
 
 <script>
-// Transition entre pages
-const transition = document.getElementById('transition');
+// Fade-in et fade-out pour navigation sans overlay noir
 const links = document.querySelectorAll('a[href^="index"], a[href^="apropos"], a[href^="gallery"], a[href^="recrutement"], a[href^="contact"]');
 
 links.forEach(link=>{
     link.addEventListener('click', e=>{
         e.preventDefault();
         const href = link.getAttribute('href');
-        transition.style.pointerEvents = 'all';
-        transition.style.opacity = 1;
+        document.body.style.opacity = 0;
         setTimeout(()=>{ window.location = href; }, 500);
     });
 });
 
-window.addEventListener('load', ()=>{ transition.style.opacity = 0; });
+window.addEventListener('load', ()=>{
+    setTimeout(()=>{ document.body.style.opacity = 1; }, 50);
+});
 
 // Canvas particules pro
 const canvas=document.getElementById('bgCanvas');
