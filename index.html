@@ -1,64 +1,146 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil - À venir</title>
-<style>
-html,body{margin:0;padding:0;height:100%;font-family:Arial, sans-serif;overflow-x:hidden;}
-body{color:white;position:relative;}
-canvas{position:fixed;top:0;left:0;z-index:-1;}
-header{padding:20px;background:rgba(0,0,0,0.5);position:sticky;top:0;z-index:10;}
-nav a{margin:0 15px;text-decoration:none;color:white;font-weight:bold;transition:0.3s;}
-nav a:hover{color:#ff4757;}
-.hero{padding:120px 20px 80px 20px;text-align:center;}
-.hero h1{font-size:3em;margin-bottom:10px;}
-.hero p{font-size:1.2em;margin-bottom:20px;}
-.btn{display:inline-block;margin-top:20px;padding:15px 30px;background:#ff4757;color:white;text-decoration:none;border-radius:8px;font-weight:bold;transition:0.3s;position:relative;overflow:hidden;}
-.btn:hover{background:#e84118;}
-.btn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:rgba(255,255,255,0.2);transform:skewX(-25deg);transition:0.5s;}
-.btn:hover::after{left:125%;}
-#countdown{font-size:2em;margin-top:20px;font-weight:bold;color:#ffea00;}
-footer{padding:20px;background:rgba(0,0,0,0.7);text-align:center;font-size:14px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu Roblox - À venir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body, html { height: 100%; overflow-x: hidden; }
+
+        canvas#bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+
+        body { color: #000; display: flex; flex-direction: column; min-height: 100vh; background: #a0d8f1; }
+
+        header { padding: 20px; text-align: center; background: rgba(255,255,255,0.5); }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        main { flex: 1; padding: 40px 20px; display: flex; flex-direction: column; gap: 50px; max-width: 1200px; margin: auto; }
+
+        section { background: rgba(255,255,255,0.6); padding: 30px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        section h2 { margin-bottom: 20px; font-size: 2rem; border-bottom: 2px solid #000; display: inline-block; padding-bottom: 5px; }
+        section p { font-size: 1.1rem; line-height: 1.6; }
+
+        .btn { display: inline-block; margin-top: 15px; padding: 10px 25px; background: #00aaff; border-radius: 10px; font-weight: bold; color: #fff; transition: 0.3s; }
+        .btn:hover { background: #0077cc; }
+
+        footer { text-align: center; padding: 20px; background: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: auto; }
+
+        .fade-in { animation: fadeIn 2s ease forwards; opacity: 0; }
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: rgba(255,255,255,0.3); padding: 20px; border-radius: 15px; text-align: center; transition: 0.3s; }
+        .card:hover { background: rgba(255,255,255,0.5); transform: translateY(-5px); }
+    </style>
 </head>
 <body>
-<canvas id="bgCanvas"></canvas>
+    <canvas id="bg"></canvas>
 
-<header>
-<nav>
-<a href="index.html">Accueil</a>
-<a href="apropos.html">À propos</a>
-<a href="gallery.html">Galerie</a>
-<a href="recrutement.html">Recrutement</a>
-<a href="contact.html">Communauté</a>
-</nav>
-</header>
+    <header>
+        <h1>ERYDEN LABS - Jeu Roblox</h1>
+        <p>Le futur du jeu Roblox arrive bientôt !</p>
+    </header>
 
-<div class="hero">
-<h1>🚀 Jeu Roblox - À venir</h1>
-<p>Préparez-vous à découvrir un monde unique !</p>
-<div id="countdown">00:00:00</div>
-<a href="https://discord.gg/cKKDpz53" class="btn">💬 Rejoindre Discord</a>
-</div>
+    <main>
+        <section class="fade-in">
+            <h2>À propos du jeu</h2>
+            <p>Découvrez une expérience unique sur Roblox avec des mécaniques innovantes, des graphismes impressionnants et un univers captivant !</p>
+            <a href="#" class="btn">En savoir plus</a>
+        </section>
 
-<footer>
-<p>© 2025 Jeu Roblox - À venir | Site officiel</p>
-</footer>
+        <section class="fade-in">
+            <h2>Fonctionnalités principales</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Multijoueur</h3>
+                    <p>Rejoignez vos amis et affrontez des joueurs du monde entier dans des batailles épiques.</p>
+                </div>
+                <div class="card">
+                    <h3>Personnalisation</h3>
+                    <p>Créez votre avatar et votre style unique grâce à des options variées.</p>
+                </div>
+                <div class="card">
+                    <h3>Quêtes & aventures</h3>
+                    <p>Explorez un monde rempli de missions excitantes et de récompenses incroyables.</p>
+                </div>
+                <div class="card">
+                    <h3>Événements spéciaux</h3>
+                    <p>Participez à des événements saisonniers avec des challenges et prix exclusifs.</p>
+                </div>
+            </div>
+        </section>
 
-<script>
-// Canvas particules simples
-const canvas=document.getElementById('bgCanvas');const ctx=canvas.getContext('2d');let width=canvas.width=window.innerWidth;let height=canvas.height=window.innerHeight;const particles=[];const particleCount=150;let mouse={x:width/2,y:height/2};
-class Particle{constructor(){this.reset()}reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.radius=Math.random()*3+1;this.speedX=(Math.random()-0.5)*1;this.speedY=(Math.random()-0.5)*1;this.alpha=Math.random()*0.5+0.5;}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${this.alpha})`;ctx.fill();}update(){const dx=mouse.x-this.x;const dy=mouse.y-this.y;this.x+=this.speedX+dx*0.001;this.y+=this.speedY+dy*0.001;if(this.x<0||this.x>width||this.y<0||this.y>height)this.reset();}}
-for(let i=0;i<particleCount;i++)particles.push(new Particle());
-function animate(){ctx.fillStyle='#87CEEB';ctx.fillRect(0,0,width,height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
-animate();window.addEventListener('resize',()=>{width=canvas.width=window.innerWidth;height=canvas.height=window.innerHeight;});
-window.addEventListener('mousemove',(e)=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+        <section class="fade-in">
+            <h2>Galerie</h2>
+            <div class="grid">
+                <div class="card"><p>Image / Screenshot 1</p></div>
+                <div class="card"><p>Image / Screenshot 2</p></div>
+                <div class="card"><p>Image / Screenshot 3</p></div>
+                <div class="card"><p>Image / Screenshot 4</p></div>
+            </div>
+        </section>
 
-// Countdown simple
-const countdown=document.getElementById('countdown');const targetDate=new Date(Date.now()+7*24*60*60*1000);
-function updateCountdown(){const now=new Date();const diff=targetDate-now;const hours=String(Math.floor(diff/1000/60/60)%24).padStart(2,'0');const minutes=String(Math.floor(diff/1000/60)%60).padStart(2,'0');const seconds=String(Math.floor(diff/1000)%60).padStart(2,'0');countdown.textContent=`${hours}:${minutes}:${seconds}`;requestAnimationFrame(updateCountdown);}
-updateCountdown();
-</script>
+        <section class="fade-in">
+            <h2>Rejoindre la communauté</h2>
+            <p>Suivez-nous sur nos réseaux sociaux et rejoignez notre serveur Discord pour ne rien manquer des dernières nouveautés.</p>
+            <a href="#" class="btn">Discord</a>
+            <a href="#" class="btn">Twitter</a>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Jeu Roblox - À venir | Site officiel
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const colors = ['#ffffff', '#a0d8f1'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 3 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        for(let i=0;i<100;i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
+
+
