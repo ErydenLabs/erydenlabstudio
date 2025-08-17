@@ -74,22 +74,23 @@ footer {padding:20px; background:rgba(0,0,0,0.7); text-align:center; font-size:1
 </footer>
 
 <script>
-// Fade-in au chargement
-window.addEventListener('DOMContentLoaded', () => {
-    document.body.style.opacity = 1;
-});
+<body style="opacity:0; transition:opacity 0.5s;">
+<script>
+  // Fade-in au chargement
+  window.addEventListener('DOMContentLoaded',()=>{document.body.style.opacity=1;});
 
-// Fade-out lors du clic sur un lien
-const links = document.querySelectorAll('a[href]');
-links.forEach(link => {
-    link.addEventListener('click', e => {
-        const href = link.getAttribute('href');
-        if(href.startsWith('http')) return; // ignore les liens externes
-        e.preventDefault();
-        document.body.style.opacity = 0;
-        setTimeout(() => { window.location.href = href; }, 500);
+  // Fade-out sur les liens internes
+  document.querySelectorAll('a[href]').forEach(link=>{
+    link.addEventListener('click', e=>{
+      const href = link.getAttribute('href');
+      if(href.startsWith('http')) return; // ignore les liens externes
+      e.preventDefault();
+      document.body.style.opacity = 0;
+      setTimeout(()=>{window.location.href = href;}, 500);
     });
-});
+  });
+</script>
+
 
 // Canvas particules interactives
 const canvas = document.getElementById('bgCanvas'); 
@@ -113,3 +114,4 @@ window.addEventListener('mousemove', (e)=>{mouse.x=e.clientX; mouse.y=e.clientY;
 
 </body>
 </html>
+
